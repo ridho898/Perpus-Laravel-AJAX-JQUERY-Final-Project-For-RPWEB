@@ -70,7 +70,6 @@ class BukuController extends Controller
                 'success'=>true,
                 'type'=> 'add',
                 'message'=>'Berhasil Menambahkan Buku',
-                'buku'=>$buku
             ]);
         }
         return response()->json([
@@ -144,7 +143,6 @@ class BukuController extends Controller
                 'success'=>true,
                 'type'=> 'update',
                 'message'=>'Berhasil Mengubah Buku',
-                'buku'=>$buku
             ]);
         }
         return response()->json([
