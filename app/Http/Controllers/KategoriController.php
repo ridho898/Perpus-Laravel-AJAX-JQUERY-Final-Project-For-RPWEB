@@ -20,7 +20,17 @@ class KategoriController extends Controller
 
     public function getAllKategori()
     {
-        return KategoriResource::collection(Kategori::all());
+        $kategoriall = Kategori::all();
+        $number=1;
+        $data =[];
+        foreach ($kategoriall as $key) {
+            $data[]=[
+                'number'=>$number++,
+                'nama'=>$key->nama,
+                'action'=>'<a data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-sm btn-edit" id="'.$key->id.'"><i class="fa fa-edit"></i></a> <a class="btn btn-sm btn-danger btn-delete" id="'.$key->id.'"><i class="fa fa-trash-o"></i></a>'
+            ];
+        }
+        return response()->json($data);
     }
 
     /**
@@ -69,9 +79,7 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        $kategori = Kategori::findOrFail($id);
-
-        return new KategoriResource($kategori);
+        
     }
 
     /**
@@ -82,7 +90,9 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+
+        return response()->json($kategori);
     }
 
     /**
@@ -98,7 +108,10 @@ class KategoriController extends Controller
             'nama'=>'required|min:3|max:100',
             'deskripsi'=>'required|min:5|max:255'
         ]);
-        $updatekategori = Kategori::where('id',$id)->update($request->all());
+        $updatekategori = Kategori::where('id',$id)->update([
+            'nama'=>$request->nama,
+            'deskripsi'=>$request->deskripsi
+        ]);
         if ($updatekategori) {
             return response()->json([
                 'success'=>true,
