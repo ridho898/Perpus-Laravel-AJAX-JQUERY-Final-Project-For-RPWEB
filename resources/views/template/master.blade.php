@@ -175,6 +175,7 @@
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
+        <li><a href="{{ route('buku.index') }}"><i class="fa fa-book"></i> <span>Buku</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>

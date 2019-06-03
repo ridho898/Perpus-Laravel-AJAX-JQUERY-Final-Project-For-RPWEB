@@ -15,7 +15,7 @@ class KategoriResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
+            'number'=>$this->id,
             'nama' => $this->nama,
             'deskripsi'=>$this->deskripsi,
             'action'=>'<a data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-sm btn-edit" id="'.$this->id.'">Edit</a>

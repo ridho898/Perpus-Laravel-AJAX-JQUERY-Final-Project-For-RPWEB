@@ -15,6 +15,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        
         return view('kategori.index');
     }
 
@@ -25,11 +26,14 @@ class KategoriController extends Controller
         $data =[];
         foreach ($kategoriall as $key) {
             $data[]=[
+                'id'=>$key->id,
+                'text'=>$key->nama,
                 'number'=>$number++,
                 'nama'=>$key->nama,
                 'action'=>'<a data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-sm btn-edit" id="'.$key->id.'"><i class="fa fa-edit"></i></a> <a class="btn btn-sm btn-danger btn-delete" id="'.$key->id.'"><i class="fa fa-trash-o"></i></a>'
             ];
         }
+
         return response()->json($data);
     }
 

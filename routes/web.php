@@ -20,3 +20,5 @@ Route::get('dashboard', function () {
 
 Route::get('/kategoriapi/list','KategoriController@getAllKategori')->name('kategori.list');
 Route::resource('kategori', 'KategoriController');
+Route::get('/bukuapi/list','BukuController@getAllBuku')->name('buku.list');
+Route::resource('buku', 'BukuController');

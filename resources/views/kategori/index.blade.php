@@ -145,7 +145,7 @@
                         data:{_token:'{{ csrf_token() }}'},
                         success:function(data){
                             $('#datatable-kategori').DataTable().ajax.reload();
-                            swal("Poof! Data User Berhasil dihapus", {
+                            swal("Poof! Data Kategori Berhasil dihapus", {
                                 icon: "success",
                             });
 
