@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                         <label for="tahun_terbit">Tahun Terbit<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="tahun_terbit" id="tahun_terbit" placeholder="penerbit Buku..." required>
+                        <input type="text" class="form-control" name="tahun_terbit" id="tahun_terbit" placeholder="Tahun Terbit Buku..." required>
                     </div>
                 <div class="form-group">
                     <label for="jumlah_eksemplar">jumlah eksemplar<span class="text-danger">*</span></label>

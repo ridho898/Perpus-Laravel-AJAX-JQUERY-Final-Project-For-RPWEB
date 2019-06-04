@@ -15,12 +15,15 @@ class siswaResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'nis'=>$this->nis,
             'nama'=>$this->nama,
             'alamat'=>$this->alamat,
             'notelp'=>$this->notelp,
             'kelas'=>$this->kelas,
-            'avatar'=>$this->avatar,
+            'email'=>$this->user->email,
+            'avatar'=>'<img src="/storage/'.$this->avatar.'" alt="" width="50px">',
+            'picture'=>$this->avatar,
             'action'=>'<a data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-sm btn-edit" id="'.$this->id.'"><i class="fa fa-edit"></i></a> <a class="btn btn-sm btn-danger btn-delete" id="'.$this->id.'"><i class="fa fa-trash-o"></i></a>'
            
         ];

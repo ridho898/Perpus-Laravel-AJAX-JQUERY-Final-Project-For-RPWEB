@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Siswa;
+use App\User;
 use App\Http\Resources\siswaResource;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -45,7 +47,7 @@ class SiswaController extends Controller
     {
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
             'nis'=>'required',
             'nama'=>'required',
             'alamat'=>'required',
@@ -55,8 +57,8 @@ class SiswaController extends Controller
         ]);
 
         $user = User::create([
-            'email'=>$request->user,
-            'password'=>$request->password,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
             'role'=>'siswa'
         ]);
         $avatar='';
@@ -122,13 +124,11 @@ class SiswaController extends Controller
         $siswa = Siswa::findOrFail($id);
         $request->validate([
             'email'=>'required|email|unique:users,email,'.$siswa->user->id,
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nis'=>'required',
             'nama'=>'required',
             'alamat'=>'required',
             'notelp'=>'required',
             'kelas'=>'required',
-            'avatar'=>'required',
         ]);
 
         $avatar = $siswa->avatar;
@@ -148,10 +148,14 @@ class SiswaController extends Controller
             'kelas'=>$request->kelas,
             'avatar'=>$avatar,
         ]);
-
+        
+        if ($request->password) {
+            $siswa->user()->update([
+                'password'=> Hash::make($request->password),
+            ]);
+        }    
         $siswa->user()->update([
-            'email'=>$request->user,
-            'password'=>$request->password,
+            'email'=>$request->email,
         ]);
 
         if ($siswa) {
@@ -176,10 +180,12 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $siswa = Siswa::where('id',$id)->delete();
+        $siswa = Siswa::findOrFail($id);
         if ($siswa->avatar && file_exists(storage_path('app/public/'.$siswa->avatar))) {
             Storage::delete('public/'.$siswa->avatar);
         }
+        $siswa->user()->delete();
+        $siswa->delete();
             if ($siswa) {
                 return response()->json([
                     'success'=>true,
