@@ -1,10 +1,10 @@
 @extends('template.master')
 @section('breadcumbs')
     <h1>
-        Siswa
+        Admin
     </h1>
     <ol class="breadcrumb">
-        <li class="active">Siswa</li>
+        <li class="active">Admin</li>
     </ol>
 @endsection
 @section('content')  
@@ -14,18 +14,17 @@
           <div class="col-xs-12">
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title">Data Siswa</h3>
-                <a id="btn-add" class="btn btn-info btn-sm pull-right"><i class="fa fa-plus"></i> Tambah Siswa</a>
+                <h3 class="box-title">Data Admin</h3>
+                <a id="btn-add" class="btn btn-info btn-sm pull-right"><i class="fa fa-plus"></i> Tambah Admin</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                <table id="tabel-siswa" class="table table-bordered table-striped">
+                <table id="tabel-admin" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>NIS</th>
+                    <th>NIP</th>
                     <th>Nama</th>
-                    <th>Kelas</th>
                     <th>Avatar</th>
                     <th>Action</th>
                   </tr>
@@ -41,7 +40,7 @@
         <!-- /.row -->
       </section>
       <!-- /.content -->
-      @include('user._siswamodal')
+      @include('user._adminmodal')
 @endsection
 @push('css')
      <!-- DataTables -->
@@ -56,34 +55,32 @@
 <script src="{{ asset('template/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 <script>
     $(function () {
-        $('#tabel-siswa').DataTable({
+        $('#tabel-admin').DataTable({
             ajax:{
-                url:'{{ route('siswa.list') }}',
+                url:'{{ route('admin.list') }}',
                 dataSrc:''
             },
             columns:[
                 {data:'id'},
-                {data:'nis'},
+                {data:'nip'},
                 {data:'nama'},
-                {data:'kelas'},
                 {data:'avatar',orderable:false,searchable:false},
                 {data:'action',orderable:false,searchable:false}
             ]
         })
 
-        const targetUrl = '{{ url("siswa") }}';
+        const targetUrl = '{{ url("admin") }}';
         $('#btn-add').click(function () {
             $('#title').html('Tambah Data')
             $('#nama').val('')
-            $('#nis').val('')
+            $('#nip').val('')
             $('#notelp').val('')
             $('#email').val('')
             $('#password').val('')
-            $('#kelas').val('')
             $('#alamat').val('')
             $('#avatar').val('')
             $('#preview-img').attr('src', '/images/ava.png');
-            $('#form-add-siswa').attr('action', targetUrl);
+            $('#form-add-admin').attr('action', targetUrl);
             $('input[name="_method"]').prop('disabled', true);
             $('#modal-form').modal()
         })
@@ -103,14 +100,14 @@
             }
         }
 
-        $("#form-add-siswa").on('submit', function(e) {
+        $("#form-add-admin").on('submit', function(e) {
             e.preventDefault();
             var form = $(this);
             var url = form.attr('action');
             $.ajax({
                 type: "POST",
                 url: url,
-                data: new FormData($("#form-add-siswa")[0]),
+                data: new FormData($("#form-add-admin")[0]),
                 dataType:'JSON',
                 contentType:false,
                 processData:false,
@@ -120,7 +117,7 @@
                     
                     // tampilkan pesan dari response message
                     swal("Sukses", res.message, "success");
-                    $('#tabel-siswa').DataTable().ajax.reload();
+                    $('#tabel-admin').DataTable().ajax.reload();
                 },
                 error: function(xhr) {
                     let errorText = '';
@@ -135,30 +132,28 @@
 </script>
 <script>
     $('body').on('click','.btn-edit',function(){
-        const targetUrl = '{{ url("siswa") }}';
+        const targetUrl = '{{ url("admin") }}';
         var id = $(this).attr('id')
         $('#title').html('Ubah Data')
         $('#nama').val('')
-        $('#nis').val('')
+        $('#nip').val('')
         $('#notelp').val('')
         $('#email').val('')
         $('#password').val('')
-        $('#kelas').val('')
         $('#alamat').val('')
         $('#avatar').val('')          
-        $('#form-add-siswa').attr('action', targetUrl+'/'+id);
+        $('#form-add-admin').attr('action', targetUrl+'/'+id);
         $('input[name="_method"]').prop('disabled', false);
         $('#modal-form').modal('show')
         $.ajax({
-            url:'/siswa/'+id+'/edit',
+            url:'/admin/'+id+'/edit',
             type:'GET',
             dataType:'JSON',
             success:function(data){
                 $('#nama').val(data.nama)
-                $('#nis').val(data.nis)
+                $('#nip').val(data.nip)
                 $('#notelp').val(data.notelp)
                 $('#email').val(data.email)
-                $('#kelas').val(data.kelas)
                 $('#alamat').val(data.alamat)  
                 $('#preview-img').attr('src','/storage/'+ data.picture);        
             }
@@ -167,11 +162,11 @@
 </script>
 <script>
         $('body').on('click','.btn-delete',function(){
-            var url = '{{ url("siswa") }}'
+            var url = '{{ url("admin") }}'
             var id = $(this).attr('id')
             swal({
                 title: "Apakah Kamu Yakin?",
-                text: "data Siswa akan dihapus secara permanen",
+                text: "data Admin akan dihapus secara permanen",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -185,8 +180,8 @@
                         dataType:'JSON',
                         data:{_token:'{{ csrf_token() }}'},
                         success:function(data){
-                          $('#tabel-siswa').DataTable().ajax.reload();
-                            swal("Poof! Data Siswa Berhasil dihapus", {
+                          $('#tabel-admin').DataTable().ajax.reload();
+                            swal("Poof! Data Admin Berhasil dihapus", {
                                 icon: "success",
                             });
 

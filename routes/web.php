@@ -24,3 +24,6 @@ Route::get('/bukuapi/list','BukuController@getAllBuku')->name('buku.list');
 Route::resource('buku', 'BukuController');
 Route::get('/siswaapi/list','SiswaController@getAllSiswa')->name('siswa.list');
 Route::resource('siswa', 'SiswaController');
+
+Route::get('/adminapi/list','AdminController@getAllAdmin')->name('admin.list');
+Route::resource('admin', 'AdminController');

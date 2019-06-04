@@ -177,7 +177,7 @@
         <li><a href="{{ route('siswa.index') }}"><i class="fa fa-users"></i> <span>Siswa</span></a></li>
         <li><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
         <li><a href="{{ route('buku.index') }}"><i class="fa fa-book"></i> <span>Buku</span></a></li>
-        <li><a href="#"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
+        <li><a href="{{ route('admin.index') }}"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Siswa;
+use App\Http\Resources\AdminResource;
+use App\Admin;
 use App\User;
-use App\Http\Resources\siswaResource;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
-class SiswaController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('user.siswa');
-    }
-
-    public function getAllSiswa()
-    {
-        $datasiswa = siswaResource::collection(Siswa::all());
-        return response()->json($datasiswa);
+        return view('user.admin');
     }
 
     /**
@@ -32,9 +26,10 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getAllAdmin()
     {
-        //
+        $dataadmin = AdminResource::collection(Admin::all());
+        return response()->json($dataadmin);
     }
 
     /**
@@ -48,43 +43,42 @@ class SiswaController extends Controller
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'nis'=>'required',
+            'nip'=>'required',
             'nama'=>'required',
             'alamat'=>'required',
             'notelp'=>'required',
-            'kelas'=>'required',
             'avatar'=>'required',
         ]);
 
         $user = User::create([
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'role'=>'siswa'
+            'role'=>'admin'
         ]);
+
         $avatar='';
         if ($request->avatar) {
             $avatar = $request->avatar->store('avatars','public');
         }
-        $user->siswa()->create([
-            'nis'=>$request->nis,
+
+        $user->admin()->create([
+            'nip'=>$request->nip,
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'notelp'=>$request->notelp,
-            'kelas'=>$request->kelas,
             'avatar'=>$avatar,
         ]);
-
         if ($user) {
             return response()->json([
                 'success'=>true,
                 'type'=> 'add',
-                'message'=>'Berhasil Menambahkan Siswa',
+                'message'=>'Berhasil Menambahkan Admin',
             ]);
         }
         return response()->json([
             'success'=>false,
             'type'=> 'add',
-            'message'=>'Gagal Menambahkan Siswa'
+            'message'=>'Gagal Menambahkan Admin'
         ]);
     }
 
@@ -96,7 +90,7 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -107,9 +101,9 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        $siswaResource = new siswaResource($siswa);
-        return response()->json($siswaResource);
+        $admin = Admin::findOrFail($id);
+        $adminResource = new AdminResource($admin);
+        return response()->json($adminResource);
     }
 
     /**
@@ -121,54 +115,50 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $siswa = Siswa::findOrFail($id);
+        $admin = Admin::findOrFail($id);
         $request->validate([
-            'email'=>'required|email|unique:users,email,'.$siswa->user->id,
-            'nis'=>'required',
+            'email'=>'required|email|unique:users,email,'.$admin->user->id,
+            'nip'=>'required',
             'nama'=>'required',
             'alamat'=>'required',
             'notelp'=>'required',
-            'kelas'=>'required',
         ]);
-
-        $avatar = $siswa->avatar;
+        $avatar = $admin->avatar;
         if ($request->avatar) {
-            if ($siswa->avatar && file_exists(storage_path('app/public/'.$siswa->avatar))) {
-                Storage::delete('public/'.$siswa->avatar);
+            if ($admin->avatar && file_exists(storage_path('app/public/'.$admin->avatar))) {
+                Storage::delete('public/'.$admin->avatar);
             }
             $file = $request->avatar->store('avatars','public');
             $avatar = $file;
         }
-
-        $siswa->update([
-            'nis'=>$request->nis,
+        $admin->update([
+            'nip'=>$request->nip,
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'notelp'=>$request->notelp,
-            'kelas'=>$request->kelas,
             'avatar'=>$avatar,
         ]);
-        
+
         if ($request->password) {
-            $siswa->user()->update([
+            $admin->user()->update([
                 'password'=> Hash::make($request->password),
             ]);
         }    
-        $siswa->user()->update([
+        $admin->user()->update([
             'email'=>$request->email,
         ]);
 
-        if ($siswa) {
+        if ($admin) {
             return response()->json([
                 'success'=>true,
                 'type'=> 'update',
-                'message'=>'Berhasil Mengubah Siswa',
+                'message'=>'Berhasil Mengubah admin',
             ]);
         }
         return response()->json([
             'success'=>false,
             'type'=> 'update',
-            'message'=>'Gagal Mengubah Siswa'
+            'message'=>'Gagal Mengubah admin'
         ]);
     }
 
@@ -180,13 +170,13 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        if ($siswa->avatar && file_exists(storage_path('app/public/'.$siswa->avatar))) {
-            Storage::delete('public/'.$siswa->avatar);
+        $admin = Admin::findOrFail($id);
+        if ($admin->avatar && file_exists(storage_path('app/public/'.$admin->avatar))) {
+            Storage::delete('public/'.$admin->avatar);
         }
-        $siswa->user()->delete();
-        $siswa->delete();
-            if ($siswa) {
+        $admin->user()->delete();
+        $admin->delete();
+            if ($admin) {
                 return response()->json([
                     'success'=>true,
                     'type'=> 'delete',
