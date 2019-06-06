@@ -8,6 +8,7 @@ use App\Admin;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Siswa;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,12 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dashboard()
+    {
+        $siswaall = Siswa::latest()->limit(8)->get();
+        
+        return view('dashboard',['siswaall'=> $siswaall]);
+    }
     public function index()
     {
         return view('user.admin');

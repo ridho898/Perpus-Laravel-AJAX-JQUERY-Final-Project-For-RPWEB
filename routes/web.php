@@ -14,9 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('dashboard', function () {
-   return view('dashboard'); 
-});
+Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
 Route::get('/kategoriapi/list','KategoriController@getAllKategori')->name('kategori.list');
 Route::resource('kategori', 'KategoriController');

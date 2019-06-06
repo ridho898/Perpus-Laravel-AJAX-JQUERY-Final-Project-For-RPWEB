@@ -38,8 +38,9 @@
         <!-- /.row -->
       </section>
       <!-- /.content -->
+      @include('kategori._modal')
 @endsection
-@include('kategori._modal')
+
 @push('css')
      <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('template/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
