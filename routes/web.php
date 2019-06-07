@@ -31,3 +31,10 @@ Route::get('/peminjaman/create','TransaksiController@peminjamanCreate')->name('p
 Route::post('/peminjaman/store','TransaksiController@peminjamanStore')->name('peminjaman.store');
 Route::get('/peminjaman','TransaksiController@indexPeminjaman')->name('peminjaman.index');
 Route::get('/peminjaman/list','TransaksiController@getAllPeminjaman')->name('peminjaman.list');
+Route::get('/peminjaman/perpanjang','TransaksiController@perpanjangpeminjaman')->name('peminjaman.perpanjang');
+
+Route::get('/pengembalian/create','TransaksiController@pengembaliancreate')->name('pengembalian.create');
+Route::get('/pengembalian/proses','TransaksiController@pengembalianproses')->name('pengembalian.proses');
+Route::get('/pengembalian','TransaksiController@indexpengembalian')->name('pengembalian.index');
+Route::get('/pengembalian/list','TransaksiController@getAllPengembalian')->name('pengembalian.list');
+

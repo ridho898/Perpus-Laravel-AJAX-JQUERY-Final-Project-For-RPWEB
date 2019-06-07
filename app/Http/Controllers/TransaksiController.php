@@ -139,4 +139,64 @@ class TransaksiController extends Controller
         $datapeminjaman = TransaksiResource::collection(Transaksi::where('status','pinjam')->get());
         return response()->json($datapeminjaman);
     }
+    
+    public function perpanjangpeminjaman(Request $request)
+    {
+        $transaksi = Transaksi::findOrFail($request->id);
+
+        $transaksi->update([
+            'tgl_kembali'=>$transaksi->tgl_kembali->add(7,'day')
+        ]);
+        if ($transaksi) {
+            return response()->json([
+                'success'=>true,
+                'message'=>'Berhasil Memperpanjang Peminjaman Buku',
+            ]);
+        }
+        return response()->json([
+            'success'=>false,
+            'message'=>'Gagal Memperpanjang Peminjaman Buku'
+        ]);
+
+    }
+
+    public function pengembaliancreate()
+    {
+        return view('pengembalian.create');
+    }
+
+    public function pengembalianproses(Request $request)
+    {
+        $transaksi = Transaksi::findOrFail($request->id);
+        $transaksi->update([
+            'status'=>'kembali'
+        ]);
+
+        $buku = Buku::findOrFail($transaksi->buku_id);
+        $buku->update([
+            'jumlah_eksemplar'=>$buku->jumlah_eksemplar+$transaksi->jumlah
+        ]);
+
+        if ($transaksi) {
+            return response()->json([
+                'success'=>true,
+                'message'=>'Berhasil Mengembalikan Peminjaman Buku',
+            ]);
+        }
+        return response()->json([
+            'success'=>false,
+            'message'=>'Gagal Mengembalikan Peminjaman Buku'
+        ]);
+
+    }
+    public function indexpengembalian()
+    {
+        return view('pengembalian.index');
+    }
+
+    public function getAllPengembalian()
+    {
+        $datapengembalian = TransaksiResource::collection(Transaksi::where('status','kembali')->get());
+        return response()->json($datapengembalian);
+    }
 }

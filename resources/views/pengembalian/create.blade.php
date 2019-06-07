@@ -1,7 +1,7 @@
 @extends('template.master')
 @section('breadcumbs')
     <h1>
-        Peminjaman
+        Pengembalian
     </h1>
     <ol class="breadcrumb">
         <li class="active">Data Peminjaman Buku
@@ -64,14 +64,14 @@
                 {data:'judul'},
                 {data:'tgl_pinjam'},
                 {data:'tgl_kembali'},
-                {data:'perpanjang',orderable:false,searchable:false}
+                {data:'kembali',orderable:false,searchable:false}
             ]
           })
-          $('#tabel-peminjaman tbody').on( 'click', '.btn-perpanjang', function () {
+          $('#tabel-peminjaman tbody').on( 'click', '.btn-kembali', function () {
             var id = $(this).attr('id')
             swal({
-                title: "Apakah Anda yakin akan memperpanjang masa peminjaman buku ?",
-                text: "Masa Peminjaman buku akan diperpanjang hingga 7 hari kedepan",
+                title: "Apakah Anda yakin buku akan dikembalikan ?",
+                text: "",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -81,7 +81,7 @@
                 if (willDelete) {
                   $.ajax({
                     type: "GET",
-                    url: '{{ route("peminjaman.perpanjang") }}',
+                    url: '{{ route("pengembalian.proses") }}',
                     data: {id:id},
                     dataType:'JSON',
                     success: function(res) {

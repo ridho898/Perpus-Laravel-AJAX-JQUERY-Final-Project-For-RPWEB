@@ -200,11 +200,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>Pengembalian Buku</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Data Pengembalian Buku</a></li>
+            <li class="active"><a href="{{ route('pengembalian.create') }}"><i class="fa fa-circle-o"></i>Pengembalian Buku</a></li>
+            <li><a href="{{ route('pengembalian.index') }}"><i class="fa fa-circle-o"></i>Data Pengembalian Buku</a></li>
           </ul>
         </li>
-        <li class="header">LAPORANT PERPUSTAKAAN</li>
+        <li class="header">LAPORAN PERPUSTAKAAN</li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-tasks"></i> <span>Laporan</span>
