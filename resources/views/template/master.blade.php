@@ -178,19 +178,46 @@
         <li class="{{ Request::segment(1) == 'kategori' ? 'active':'' }}"><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
         <li class="{{ Request::segment(1) == 'buku' ? 'active':'' }}"><a href="{{ route('buku.index') }}"><i class="fa fa-book"></i> <span>Buku</span></a></li>
         <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
+        <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-list"></i> <span>Daftar Pengunjung</span></a></li>
+        <li class="header">TRANSAKSI</li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-send"></i> <span>Peminjaman</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li class="active"><a href="{{ route('peminjaman.create') }}"><i class="fa fa-circle-o"></i>Peminjaman Buku</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Data Peminjaman Buku</a></li>
           </ul>
         </li>
-        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-reply"></i> <span>Pengembalian</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>Pengembalian Buku</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Data Pengembalian Buku</a></li>
+          </ul>
+        </li>
+        <li class="header">LAPORANT PERPUSTAKAAN</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-tasks"></i> <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>Laporan Peminjaman Buku</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Laporan Pengembalian Buku</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Laporan Daftar Pengunjung</a></li>
+          </ul>
+        </li>
         
       </ul>
     </section>

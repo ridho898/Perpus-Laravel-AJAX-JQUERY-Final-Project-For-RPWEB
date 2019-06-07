@@ -25,3 +25,7 @@ Route::resource('siswa', 'SiswaController');
 
 Route::get('/adminapi/list','AdminController@getAllAdmin')->name('admin.list');
 Route::resource('admin', 'AdminController');
+
+//route transaksi peminjaman dan pengembalian
+Route::get('/peminjaman/create','TransaksiController@peminjamanCreate')->name('peminjaman.create');
+Route::post('/peminjaman/store','TransaksiController@peminjamanStore')->name('peminjaman.store');

@@ -18,6 +18,7 @@ class siswaResource extends JsonResource
             'id'=>$this->id,
             'nis'=>$this->nis,
             'nama'=>$this->nama,
+            'text'=>'('.$this->nis.')'.' '.$this->nama,
             'alamat'=>$this->alamat,
             'notelp'=>$this->notelp,
             'kelas'=>$this->kelas,
