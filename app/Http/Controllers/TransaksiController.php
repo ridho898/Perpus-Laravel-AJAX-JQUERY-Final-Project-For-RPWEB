@@ -8,6 +8,7 @@ use App\Siswa;
 use App\Transaksi;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use App\Http\Resources\TransaksiResource;
 
 class TransaksiController extends Controller
 {
@@ -128,8 +129,14 @@ class TransaksiController extends Controller
         
     }
 
-    public function getApiPeminjaman()
+    public function indexPeminjaman()
     {
-        
+        return view('peminjaman.index');
+    }
+
+    public function getAllPeminjaman()
+    {
+        $datapeminjaman = TransaksiResource::collection(Transaksi::where('status','pinjam')->get());
+        return response()->json($datapeminjaman);
     }
 }

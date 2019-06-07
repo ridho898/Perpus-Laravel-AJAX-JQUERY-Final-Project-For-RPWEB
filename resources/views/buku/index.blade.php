@@ -40,8 +40,9 @@
         <!-- /.row -->
       </section>
       <!-- /.content -->
-@endsection
+      
 @include('buku._modal')
+@endsection
 @push('css')
      <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('template/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">

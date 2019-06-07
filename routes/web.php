@@ -29,3 +29,5 @@ Route::resource('admin', 'AdminController');
 //route transaksi peminjaman dan pengembalian
 Route::get('/peminjaman/create','TransaksiController@peminjamanCreate')->name('peminjaman.create');
 Route::post('/peminjaman/store','TransaksiController@peminjamanStore')->name('peminjaman.store');
+Route::get('/peminjaman','TransaksiController@indexPeminjaman')->name('peminjaman.index');
+Route::get('/peminjaman/list','TransaksiController@getAllPeminjaman')->name('peminjaman.list');

@@ -189,7 +189,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="{{ route('peminjaman.create') }}"><i class="fa fa-circle-o"></i>Peminjaman Buku</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Data Peminjaman Buku</a></li>
+            <li><a href="{{ route('peminjaman.index') }}"><i class="fa fa-circle-o"></i>Data Peminjaman Buku</a></li>
           </ul>
         </li>
         <li class="treeview">
