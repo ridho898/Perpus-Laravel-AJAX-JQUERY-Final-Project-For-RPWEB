@@ -41,3 +41,7 @@ Route::get('/pengembalian','TransaksiController@indexpengembalian')->name('penge
 Route::get('/pengembalian/list','TransaksiController@getAllPengembalian')->name('pengembalian.list');
 Route::get('/pengembalian/cetak','TransaksiController@cetakpengembalian')->name('pengembalian.cetak');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

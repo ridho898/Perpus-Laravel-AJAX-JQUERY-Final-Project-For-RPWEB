@@ -40,9 +40,9 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>SPR</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>SIPER</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -53,49 +53,6 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/template/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
@@ -110,21 +67,6 @@
                   Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -159,20 +101,9 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">MENU ADMIN</li>
         <li  class="{{ Request::segment(1) == 'dashboard' ? 'active':'' }}"><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="{{ Request::segment(1) == 'siswa' ? 'active':'' }}"><a href="{{ route('siswa.index') }}"><i class="fa fa-users"></i> <span>Siswa</span></a></li>
         <li class="{{ Request::segment(1) == 'kategori' ? 'active':'' }}"><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
@@ -180,45 +111,30 @@
         <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
         <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-list"></i> <span>Daftar Pengunjung</span></a></li>
         <li class="header">TRANSAKSI</li>
-        <li class="treeview">
+        <li class="treeview {{ Request::segment(1) == 'peminjaman' ? 'active':'' }}">
           <a href="#">
-            <i class="fa fa-send"></i> <span>Peminjaman</span>
+            <i class="fa fa-sign-in"></i> <span>Peminjaman</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{ route('peminjaman.create') }}"><i class="fa fa-circle-o"></i>Peminjaman Buku</a></li>
-            <li><a href="{{ route('peminjaman.index') }}"><i class="fa fa-circle-o"></i>Data Peminjaman Buku</a></li>
+            <li class="{{ Request::segment(1) == 'peminjaman' && Request::segment(2) == 'create' ? 'active':'' }}"><a href="{{ route('peminjaman.create') }}"><i class="fa fa-circle-o text-aqua"></i>Peminjaman Buku</a></li>
+            <li class="{{ Request::segment(1) == 'peminjaman' &&  Request::segment(2) == '' ? 'active':'' }}"><a href="{{ route('peminjaman.index') }}"><i class="fa fa-circle-o text-aqua"></i>Data Peminjaman Buku</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview {{ Request::segment(1) == 'pengembalian' ? 'active':'' }}">
           <a href="#">
-            <i class="fa fa-reply"></i> <span>Pengembalian</span>
+            <i class="fa fa-sign-out"></i> <span>Pengembalian</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{ route('pengembalian.create') }}"><i class="fa fa-circle-o"></i>Pengembalian Buku</a></li>
-            <li><a href="{{ route('pengembalian.index') }}"><i class="fa fa-circle-o"></i>Data Pengembalian Buku</a></li>
+            <li class="{{Request::segment(1) == 'pengembalian' && Request::segment(2) == 'create' ? 'active':'' }}"><a href="{{ route('pengembalian.create') }}"><i class="fa fa-circle-o text-aqua"></i>Pengembalian Buku</a></li>
+            <li class="{{ Request::segment(1) == 'pengembalian' &&  Request::segment(2) == '' ? 'active':'' }}"><a href="{{ route('pengembalian.index') }}"><i class="fa fa-circle-o text-aqua"></i>Data Pengembalian Buku</a></li>
           </ul>
         </li>
-        <li class="header">LAPORAN PERPUSTAKAAN</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-tasks"></i> <span>Laporan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>Laporan Peminjaman Buku</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Laporan Pengembalian Buku</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>Laporan Daftar Pengunjung</a></li>
-          </ul>
-        </li>
-        
       </ul>
     </section>
     <!-- /.sidebar -->
