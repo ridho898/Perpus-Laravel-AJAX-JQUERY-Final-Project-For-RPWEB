@@ -15,7 +15,7 @@ class TransaksiController extends Controller
 {
     public function peminjamanCreate()
     {
-        $bukuall = Buku::all();
+        $bukuall = Buku::where('jumlah_eksemplar','>',0)->get();
         return view('peminjaman.create',compact('bukuall'));
     }
 

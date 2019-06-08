@@ -50,7 +50,8 @@
                     <tr>
                       <th>ID</th>
                       <th>judul</th>
-                      <th>Jumlah Buku</th>
+                      <th>Jumlah buku tersedia</th>
+                      <th>jumlah peminjaman buku</th>
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -83,7 +84,7 @@
                     <th>judul</th>
                     <th>penulis</th>
                     <th>Tahun Terbit</th>
-                    <th>Jumlah Buku</th>
+                    <th>Jumlah Buku Tersedia</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -110,6 +111,7 @@
         <!-- /.row -->
       </section>
       <!-- /.content -->
+      
 @endsection
 @push('css')
      <!-- DataTables -->
@@ -184,7 +186,8 @@ $(function(){
                 table_pinjaman.row.add([
                     data.id+'<input type="number" class="hidden" value="'+data.id+'" name="buku_id['+key+']" />',
                     data.judul,
-                    '<input type="number" class="form-control" value="1" name="jumlah['+key+']"/>',
+                    data.jumlah_eksemplar,
+                    '<input type="number" class="form-control" max="'+data.jumlah_eksemplar+'" value="1" name="jumlah['+key+']"/>',
                     '<a class="btn btn-danger btn-sm btn-trash" id="'+data.id+'"><i class="fa fa-trash"></i></a>'
                 ]).draw( false );
                 table_buku.row( row).remove().draw();
