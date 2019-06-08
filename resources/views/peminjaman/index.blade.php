@@ -16,7 +16,11 @@
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Data Peminjam Buku</h3>
-                <a id="btn-add" href="{{ route('peminjaman.create') }}" class="btn btn-info btn-sm pull-right"><i class="fa fa-sign-in"></i> Meminjam Buku</a>
+                <div class="box-tools pull-right">
+                  <a id="btn-add" href="{{ route('peminjaman.create') }}" class="btn btn-success btn-sm"><i class="fa fa-sign-in"></i> Meminjam Buku</a>
+                  <a id="btn-add" href="{{ route('peminjaman.cetak') }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Unduh (.pdf)</a>
+                </div>
+                
               </div>
               <!-- /.box-header -->
               <div class="box-body">

@@ -9,85 +9,10 @@ use App\Transaksi;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use App\Http\Resources\TransaksiResource;
+use PDF;
 
 class TransaksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function peminjamanCreate()
     {
         $bukuall = Buku::all();
@@ -198,5 +123,23 @@ class TransaksiController extends Controller
     {
         $datapengembalian = TransaksiResource::collection(Transaksi::where('status','kembali')->get());
         return response()->json($datapengembalian);
+    }
+
+    public function cetakpeminjaman()
+    {
+        $transaksiall = Transaksi::where('status','pinjam')->get();
+        $pdf = PDF::loadView('peminjaman.cetak',compact('transaksiall'));
+        
+        return $pdf->download('datapeminjamanbuku.pdf');
+        //return view('peminjaman.cetak',compact('transaksiall'));
+    }
+
+    public function cetakpengembalian()
+    {
+        $transaksiall = Transaksi::where('status','kembali')->get();
+        $pdf = PDF::loadView('pengembalian.cetak',compact('transaksiall'));
+        
+        return $pdf->download('datapengembalianbuku.pdf');
+        //return view('pengembalian.cetak',compact('transaksiall'));
     }
 }
