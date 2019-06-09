@@ -54,18 +54,25 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
+            @php
+                if (Auth::user()->admin != null) {
+                    $userlogin = Auth::user()->admin;
+                }else{
+                    $userlogin = Auth::user()->siswa;
+                }
+            @endphp
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/template/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="{{ asset('/storage/'.$userlogin->avatar) }}" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{ Auth::user()->admin->nama ?? Auth::user()->siswa->nama }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/template/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="{{ asset('/storage/'. $userlogin->avatar ) }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ Auth::user()->admin->nama ?? Auth::user()->siswa->nama }}
+                  <small>{{ Auth::user()->role }}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -99,47 +106,57 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/template/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ asset('/storage/'. $userlogin->avatar) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ Auth::user()->admin->nama ?? Auth::user()->siswa->nama }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENU ADMIN</li>
-        <li  class="{{ Request::segment(1) == 'dashboard' ? 'active':'' }}"><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li class="{{ Request::segment(1) == 'siswa' ? 'active':'' }}"><a href="{{ route('siswa.index') }}"><i class="fa fa-users"></i> <span>Siswa</span></a></li>
-        <li class="{{ Request::segment(1) == 'kategori' ? 'active':'' }}"><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
-        <li class="{{ Request::segment(1) == 'buku' ? 'active':'' }}"><a href="{{ route('buku.index') }}"><i class="fa fa-book"></i> <span>Buku</span></a></li>
-        <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
-        <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-list"></i> <span>Daftar Pengunjung</span></a></li>
-        <li class="header">TRANSAKSI</li>
-        <li class="treeview {{ Request::segment(1) == 'peminjaman' ? 'active':'' }}">
-          <a href="#">
-            <i class="fa fa-sign-in"></i> <span>Peminjaman</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="{{ Request::segment(1) == 'peminjaman' && Request::segment(2) == 'create' ? 'active':'' }}"><a href="{{ route('peminjaman.create') }}"><i class="fa fa-circle-o text-aqua"></i>Peminjaman Buku</a></li>
-            <li class="{{ Request::segment(1) == 'peminjaman' &&  Request::segment(2) == '' ? 'active':'' }}"><a href="{{ route('peminjaman.index') }}"><i class="fa fa-circle-o text-aqua"></i>Data Peminjaman Buku</a></li>
-          </ul>
-        </li>
-        <li class="treeview {{ Request::segment(1) == 'pengembalian' ? 'active':'' }}">
-          <a href="#">
-            <i class="fa fa-sign-out"></i> <span>Pengembalian</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="{{Request::segment(1) == 'pengembalian' && Request::segment(2) == 'create' ? 'active':'' }}"><a href="{{ route('pengembalian.create') }}"><i class="fa fa-circle-o text-aqua"></i>Pengembalian Buku</a></li>
-            <li class="{{ Request::segment(1) == 'pengembalian' &&  Request::segment(2) == '' ? 'active':'' }}"><a href="{{ route('pengembalian.index') }}"><i class="fa fa-circle-o text-aqua"></i>Data Pengembalian Buku</a></li>
-          </ul>
-        </li>
+
+        @if (Auth::user()->role == 'admin')
+          <li class="header">MENU ADMIN</li>
+          <li  class="{{ Request::segment(1) == 'home' ? 'active':'' }}"><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li class="{{ Request::segment(1) == 'siswa' ? 'active':'' }}"><a href="{{ route('siswa.index') }}"><i class="fa fa-users"></i> <span>Siswa</span></a></li>
+          <li class="{{ Request::segment(1) == 'kategori' ? 'active':'' }}"><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
+          <li class="{{ Request::segment(1) == 'buku' ? 'active':'' }}"><a href="{{ route('buku.index') }}"><i class="fa fa-book"></i> <span>Buku</span></a></li>
+          <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
+          <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-list"></i> <span>Daftar Pengunjung</span></a></li>
+          <li class="header">TRANSAKSI</li>
+          <li class="treeview {{ Request::segment(1) == 'peminjaman' ? 'active':'' }}">
+            <a href="#">
+              <i class="fa fa-sign-in"></i> <span>Peminjaman</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ Request::segment(1) == 'peminjaman' && Request::segment(2) == 'create' ? 'active':'' }}"><a href="{{ route('peminjaman.create') }}"><i class="fa fa-circle-o text-aqua"></i>Peminjaman Buku</a></li>
+              <li class="{{ Request::segment(1) == 'peminjaman' &&  Request::segment(2) == '' ? 'active':'' }}"><a href="{{ route('peminjaman.index') }}"><i class="fa fa-circle-o text-aqua"></i>Data Peminjaman Buku</a></li>
+            </ul>
+          </li>
+          <li class="treeview {{ Request::segment(1) == 'pengembalian' ? 'active':'' }}">
+            <a href="#">
+              <i class="fa fa-sign-out"></i> <span>Pengembalian</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{Request::segment(1) == 'pengembalian' && Request::segment(2) == 'create' ? 'active':'' }}"><a href="{{ route('pengembalian.create') }}"><i class="fa fa-circle-o text-aqua"></i>Pengembalian Buku</a></li>
+              <li class="{{ Request::segment(1) == 'pengembalian' &&  Request::segment(2) == '' ? 'active':'' }}"><a href="{{ route('pengembalian.index') }}"><i class="fa fa-circle-o text-aqua"></i>Data Pengembalian Buku</a></li>
+            </ul>
+          </li>
+        @else
+          <li class="header">MENU SISWA</li>
+          <li  class="{{ Request::segment(1) == 'home' ? 'active':'' }}"><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li class="{{ Request::segment(1) == 'siswa' && Request::segment(2) == 'buku'? 'active':'' }}"><a href="{{ route('siswa.buku') }}"><i class="fa fa-book"></i> <span>Daftar Buku</span></a></li>
+          <li class="{{ Request::segment(1) == 'transaksi' ? 'active':'' }}"><a href="{{ route('transaksi.index') }}"><i class="fa fa-tasks"></i>Data Transaksi</a></li>  
+         
+        @endif
+        
       </ul>
     </section>
     <!-- /.sidebar -->

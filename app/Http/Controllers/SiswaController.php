@@ -8,6 +8,9 @@ use App\User;
 use App\Http\Resources\siswaResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use App\Transaksi;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class SiswaController extends Controller
 {
@@ -198,5 +201,17 @@ class SiswaController extends Controller
                 'type'=> 'delete',
                 'message'=>'Gagal Menghapus Siswa'
             ]);
+    }
+
+    public function transaksisiswa()
+    {
+        $transaksisiswa = Transaksi::where('siswa_id',Auth::user()->siswa->id)->get();
+        $now = Carbon::now();
+        return view('user.transaksisiswa',compact('transaksisiswa','now'));
+    }
+
+    public function siswabuku()
+    {
+        return view('user.siswabuku');
     }
 }
