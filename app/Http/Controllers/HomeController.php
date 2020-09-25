@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Siswa;
+use App\Admin;
 use App\Transaksi;
 use App\Kategori;
 use App\Buku;
+use App\Postboard;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -30,15 +32,9 @@ class HomeController extends Controller
     {
         $jmlsiswa = Siswa::count();
         $jmlbuku = Buku::count();
-        $jmlkategori = Kategori::count();
+        $jmlpost = Postboard::count();
         $jmltransaksi = Transaksi::count();
-        // $nama = '';
-        // if (Auth::user()->admin != null) {
-        //     dd('admin'.Auth::user()->admin->nama);
-        // }else{
-        //     dd('user'.Auth::user()->siswa->nama);
-        // }
-        
-        return view('home',compact('jmlsiswa','jmlbuku','jmlkategori','jmltransaksi'));
+        $datapostboard = Postboard::leftJoin('admin','postboard.admin_id','=','admin.id')->limit(4)->get();        
+        return view('home',compact('jmlsiswa','jmlbuku','jmlpost','jmltransaksi','datapostboard'));
     }
 }

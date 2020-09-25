@@ -2,7 +2,7 @@
 @section('breadcumbs')
     <h1>
         Dashboard
-        <small>Control panel</small>
+        <small>Control panel</small>        
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -23,9 +23,19 @@
             <!-- /.box-header -->
             <!-- form start -->
             
-              <div class="box-body text-center">
-                <h1>Sistem Informasi Perpustakaan Sekolah</h1>
-                <img src="{{ asset('images/library.png') }}" alt="" width="200">
+              <div class="box-body">
+                <div class="row text-center text-middle">
+                  <div class="col-md-6" style="padding-top:75px">
+                    <h1>Sistem Informasi Perpustakaan Sekolah</h1>
+                    <blockquote>
+                      <p>The more that you read, the more things you will know</p>
+                      <small>Dr Seuss</small>
+                    </blockquote>
+                  </div>
+                  <div class="col-md-6">
+                    <img src="{{ asset('images/banner.png') }}" width="500px" alt="">
+                  </div>
+                </div>
               </div>
               <!-- /.box-body -->
           </div>
@@ -68,9 +78,9 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>{{ $jmlkategori }}</h3>
+                  <h3>{{ $jmlpost }}</h3>
     
-                  <p>Kategori</p>
+                  <p>Post</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bookmark"></i>
@@ -95,6 +105,39 @@
             <!-- ./col -->
           </div>
      @endif
+     <div class="row">
+        @foreach ($datapostboard as $row)  
+          <div class="col-md-6">
+            <!-- Box Comment -->
+            <div class="box box-widget">
+              <div class="box-header with-border">
+                <div class="user-block">
+                  <img class="img-circle" src="{{ asset('images/ava.png') }}" alt="User Image">
+                  <span class="username"><a>{{ $row->judul }}</a></span>
+                  <span class="description">{{ $row->nama }} - {{ $row->updated_at->diffForHumans() }}</span>
+                </div>
+                <!-- /.user-block -->
+                <div class="box-tools">
+                  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
+                    <i class="fa fa-circle-o"></i></button>
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <img class="img-responsive pad" src="{{ asset('storage/'.$row->img) }}" alt="Photo">
+                <p>{{ $row->deskripsi }}</p>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        @endforeach
+    </div>
+    <!-- /.row -->
         </section>
-     
 @endsection

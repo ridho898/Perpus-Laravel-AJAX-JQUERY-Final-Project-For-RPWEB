@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Perpus</title>
+  <title>SIPER</title>
+  <link rel="icon"  href="/images/favicon.ico"/>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -21,6 +22,9 @@
  
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
+   <!-- Pace style -->
+   <link rel="stylesheet" href="{{ asset('template/plugins/pace/pace.min.css')}}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -119,11 +123,11 @@
         @if (Auth::user()->role == 'admin')
           <li class="header">MENU ADMIN</li>
           <li  class="{{ Request::segment(1) == 'home' ? 'active':'' }}"><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li  class="{{ Request::segment(1) == 'postboard' ? 'active':'' }}"><a href="{{ route('postboard.index') }}"><i class="fa fa-bars"></i> <span>PostBoard</span></a></li>
           <li class="{{ Request::segment(1) == 'siswa' ? 'active':'' }}"><a href="{{ route('siswa.index') }}"><i class="fa fa-users"></i> <span>Siswa</span></a></li>
           <li class="{{ Request::segment(1) == 'kategori' ? 'active':'' }}"><a href="{{ route('kategori.index') }}"><i class="fa fa-tags"></i> <span>Kategori</span></a></li>
           <li class="{{ Request::segment(1) == 'buku' ? 'active':'' }}"><a href="{{ route('buku.index') }}"><i class="fa fa-book"></i> <span>Buku</span></a></li>
           <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-user-secret"></i> <span>Admin</span></a></li>
-          <li class="{{ Request::segment(1) == 'admin' ? 'active':'' }}"><a href="{{ route('admin.index') }}"><i class="fa fa-list"></i> <span>Daftar Pengunjung</span></a></li>
           <li class="header">TRANSAKSI</li>
           <li class="treeview {{ Request::segment(1) == 'peminjaman' ? 'active':'' }}">
             <a href="#">
@@ -393,7 +397,7 @@
 
 <!-- Sparkline -->
 <script src="{{ asset('template/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
-
+<script src="{{ asset('template/bower_components/PACE/pace.min.js') }}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <!-- Slimscroll -->
@@ -405,6 +409,11 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('template/dist/js/demo.js') }}"></script>
+<script>
+$(document).ajaxStart(function () {
+    Pace.restart()
+})
+</script>
 @stack('script')
 </body>
 </html>

@@ -23,6 +23,7 @@ class AdminController extends Controller
         
         return view('dashboard',['siswaall'=> $siswaall]);
     }
+    
     public function index()
     {
         return view('user.admin');

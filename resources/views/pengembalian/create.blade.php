@@ -28,6 +28,7 @@
                     <th>judul</th>
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Kembali</th>
+                    <th>Denda</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -64,6 +65,7 @@
                 {data:'judul'},
                 {data:'tgl_pinjam'},
                 {data:'tgl_kembali'},
+                {data:'denda'},
                 {data:'kembali',orderable:false,searchable:false}
             ]
           })

@@ -25,7 +25,9 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/siswa/buku','SiswaController@siswabuku')->name('siswa.buku');
     Route::middleware(['admin'])->group(function (){
         Route::get('/adminapi/list','AdminController@getAllAdmin')->name('admin.list');
-        Route::resource('admin', 'AdminController');
+        Route::resource('admin', 'AdminController');        
+        Route::get('/postboardapi/list','PostboardController@getAllPostboard')->name('postboard.list');
+        Route::resource('postboard', 'PostboardController');
         Route::get('/siswaapi/list','SiswaController@getAllSiswa')->name('siswa.list');
         Route::resource('siswa', 'SiswaController');
         Route::resource('buku', 'BukuController');

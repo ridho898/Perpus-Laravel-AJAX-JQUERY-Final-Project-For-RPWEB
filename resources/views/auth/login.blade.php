@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="/images/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 <!--===============================================================================================-->
@@ -20,11 +20,14 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
-                    @csrf
-					<span class="login100-form-title p-b-43">
+					@csrf
+					<div class="row justify-content-center">
+						<img src="{{ asset('images/login.png') }}" alt="" class="img" width="300px" height="200px">
+					</div>
+					<span class="login100-form-title p-b-40">
 						Sistem Informasi Perpustakaan Sekolah
 					</span>
-					<span class="login100-form-title p-b-30">
+					<span class="login100-form-subtitle p-b-10">
 						Login
 					</span>
 					
@@ -55,6 +58,7 @@
 	</div>
 <!--===============================================================================================-->
 	<script src="{{ asset('template/login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+	<script src="{{ asset('template/login/vendor/bootstrap/js/popper.js')}}"></script>
 	<script src="{{ asset('template/login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('template/login/js/main.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

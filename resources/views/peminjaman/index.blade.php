@@ -31,7 +31,8 @@
                     <th>nama</th>
                     <th>judul</th>
                     <th>Tanggal Pinjam</th>
-                    <th>Tanggal Kembali</th>
+                    <th>Batas Peminjaman</th>
+                    <th>Denda</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -68,6 +69,7 @@
                 {data:'judul'},
                 {data:'tgl_pinjam'},
                 {data:'tgl_kembali'},
+                {data:'denda'},
                 {data:'perpanjang',orderable:false,searchable:false}
             ]
           })

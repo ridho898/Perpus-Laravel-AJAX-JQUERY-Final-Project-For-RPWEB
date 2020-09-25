@@ -30,7 +30,7 @@
                     <th>nama</th>
                     <th>judul</th>
                     <th>Tanggal Pinjam</th>
-                    <th>Tanggal Kembali</th>
+                    <th>Batas Peminjaman</th>
                     <th>Tanggal pengembalian buku</th>
                   </tr>
                   </thead>

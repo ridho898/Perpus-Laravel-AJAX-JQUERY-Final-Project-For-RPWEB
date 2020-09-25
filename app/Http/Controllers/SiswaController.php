@@ -67,7 +67,7 @@ class SiswaController extends Controller
         $avatar='';
         if ($request->avatar) {
             $avatar = $request->avatar->store('avatars','public');
-        }
+        }                
         $user->siswa()->create([
             'nis'=>$request->nis,
             'nama'=>$request->nama,
